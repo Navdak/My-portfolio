@@ -15,6 +15,11 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Custom CSS -->
     <style>
         :root {
@@ -38,6 +43,7 @@
             background-color: var(--dark-bg);
             color: var(--text-primary);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         html {
@@ -81,7 +87,7 @@
             height: 100%;
         }
 
-        /* Animated background */
+        /* Animated background - Improved to prevent overflow */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -106,18 +112,14 @@
         }
 
         @keyframes bgAnimation {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translate(0, 0) rotate(0deg);
             }
-
             33% {
-                transform: translate(-20px, -20px) rotate(1deg);
+                transform: translate(-10px, -10px) rotate(1deg);
             }
-
             66% {
-                transform: translate(20px, -10px) rotate(-1deg);
+                transform: translate(10px, -5px) rotate(-1deg);
             }
         }
 
@@ -154,12 +156,9 @@
         }
 
         @keyframes floating {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0px);
             }
-
             50% {
                 transform: translateY(-10px);
             }
@@ -199,19 +198,15 @@
             from {
                 width: 0
             }
-
             to {
                 width: 100%
             }
         }
 
         @keyframes blink-caret {
-
-            from,
-            to {
+            from, to {
                 border-color: transparent
             }
-
             50% {
                 border-color: #6366f1
             }
@@ -312,13 +307,12 @@
             0% {
                 transform: rotateX(0) rotateY(0);
             }
-
             100% {
                 transform: rotateX(360deg) rotateY(360deg);
             }
         }
 
-        /* Particle background */
+        /* Particle background - Improved to prevent overflow */
         .particles {
             position: fixed;
             top: 0;
@@ -338,10 +332,109 @@
         }
 
         /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .cube-container {
+                width: 80px;
+                height: 80px;
+                right: 5%;
+            }
+            .cube-face {
+                width: 80px;
+                height: 80px;
+            }
+            .front {
+                transform: translateZ(40px);
+            }
+            .back {
+                transform: rotateY(180deg) translateZ(40px);
+            }
+            .right {
+                transform: rotateY(90deg) translateZ(40px);
+            }
+            .left {
+                transform: rotateY(-90deg) translateZ(40px);
+            }
+            .top {
+                transform: rotateX(90deg) translateZ(40px);
+            }
+            .bottom {
+                transform: rotateX(-90deg) translateZ(40px);
+            }
+        }
+
         @media (max-width: 768px) {
             .cube-container {
                 display: none;
             }
+            
+            .hero-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .typing-animation {
+                white-space: normal;
+                border-right: none;
+                animation: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .hero-section {
+                padding-top: 6rem;
+                padding-bottom: 4rem;
+            }
+            
+            .section-padding {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            
+            .gradient-border-inner {
+                padding: 1rem;
+            }
+            
+            .project-card img {
+                height: 180px;
+            }
+        }
+
+        /* Professional improvements */
+        .section-padding {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .hero-section {
+            padding-top: 8rem;
+            padding-bottom: 6rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Smooth transitions for all interactive elements */
+        a, button {
+            transition: all 0.3s ease;
+        }
+
+        /* Improved focus states for accessibility */
+        a:focus, button:focus {
+            outline: 2px solid #6366f1;
+            outline-offset: 2px;
+        }
+
+        /* Better text contrast */
+        .text-gray-400 {
+            color: #94a3b8;
         }
     </style>
 </head>
@@ -355,8 +448,8 @@
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold gradient-text">PO</div>
+        <div class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold gradient-text">IPO</div>
             <div class="hidden md:flex space-x-8">
                 <a href="#home" class="nav-link text-gray-300 hover:text-white">Home</a>
                 <a href="#about" class="nav-link text-gray-300 hover:text-white">About</a>
@@ -372,43 +465,41 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-slate-800 px-6 py-4">
-            <a href="#home" class="block py-2 text-gray-300 hover:text-white">Home</a>
-            <a href="#about" class="block py-2 text-gray-300 hover:text-white">About</a>
-            <a href="#skills" class="block py-2 text-gray-300 hover:text-white">Skills</a>
-            <a href="#projects" class="block py-2 text-gray-300 hover:text-white">Projects</a>
-            <a href="#services" class="block py-2 text-gray-300 hover:text-white">Services</a>
-            <a href="#contact" class="block py-2 text-gray-300 hover:text-white">Contact</a>
+            <a href="#home" class="block py-2 text-gray-300 hover:text-white transition-colors">Home</a>
+            <a href="#about" class="block py-2 text-gray-300 hover:text-white transition-colors">About</a>
+            <a href="#skills" class="block py-2 text-gray-300 hover:text-white transition-colors">Skills</a>
+            <a href="#projects" class="block py-2 text-gray-300 hover:text-white transition-colors">Projects</a>
+            <a href="#services" class="block py-2 text-gray-300 hover:text-white transition-colors">Services</a>
+            <a href="#contact" class="block py-2 text-gray-300 hover:text-white transition-colors">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative">
-        <div class="container mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+    <section id="home" class="min-h-screen flex items-center justify-center relative hero-section">
+        <div class="container mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div data-aos="fade-right">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
                     Hi, I'm <span class="gradient-text">Ikechukwu Prince Onyebuchi</span>
                 </h1>
-                <h2 class="text-2xl md:text-3xl mb-4 text-gray-300">Full-Stack Web Developer</h2>
-                <p class="text-lg text-gray-400 mb-8 typing-animation">Building responsive and dynamic applications with
-                    modern web technologies</p>
+                <h2 class="text-xl sm:text-2xl md:text-3xl mb-4 text-gray-300">Full-Stack Web Developer</h2>
+                <p class="text-base sm:text-lg text-gray-400 mb-8 typing-animation">Building responsive and dynamic applications with modern web tech</p>
                 <div class="flex flex-wrap gap-4">
                     <a href="#contact" class="btn-primary px-6 py-3 rounded-lg text-white font-medium">Get In Touch</a>
-                    <a href="#projects"
-                        class="px-6 py-3 rounded-lg border border-indigo-500 text-indigo-400 font-medium hover:bg-indigo-500/10 transition-all">View
-                        Projects</a>
+                    <a href="#projects" class="px-6 py-3 rounded-lg border border-indigo-500 text-indigo-400 font-medium hover:bg-indigo-500/10 transition-all">View Projects</a>
                 </div>
                 <div class="flex gap-4 mt-8">
-                    <a href="https://github.com/Navdak" class="text-gray-400 hover:text-white transition-colors"><i
-                            class="fab fa-github text-2xl"></i></a>
-                    <a href="www.linkedin.com/in/ikechukw" class="text-gray-400 hover:text-white transition-colors"><i
-                            class="fab fa-linkedin text-2xl"></i></a>
-                    <a href="https://x.com/navdak86" class="text-gray-400 hover:text-white transition-colors"><i
-                            class="fab fa-twitter text-2xl"></i></a>
+                    <a href="https://github.com/Navdak" class="text-gray-400 hover:text-white transition-colors" aria-label="GitHub">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ikechukw" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="https://x.com/navdak86" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
                 </div>
             </div>
             <div class="relative" data-aos="fade-left">
-                <div
-                    class="w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden border-4 border-indigo-500 floating">
+                <div class="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden border-4 border-indigo-500 floating hero-image">
                     <img src="./img/profile-pics.png" alt="Prince O" class="w-full h-full object-cover">
                 </div>
                 <!-- 3D Cube Element -->
@@ -427,10 +518,10 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20">
-        <div class="container mx-auto px-6">
+    <section id="about" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">About Me</h2>
-            <div class="grid md:grid-cols-2 gap-12">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
                 <div data-aos="fade-right">
                     <div class="gradient-border h-full">
                         <div class="gradient-border-inner">
@@ -468,10 +559,10 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-slate-800/50">
-        <div class="container mx-auto px-6">
+    <section id="skills" class="section-padding bg-slate-800/50">
+        <div class="container mx-auto px-4 sm:px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Technical Skills</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Frontend Skills -->
                 <div class="card-3d" data-aos="fade-up" data-aos-delay="100">
                     <div class="bg-slate-800 rounded-lg p-6 h-full">
@@ -594,15 +685,6 @@
                                     <div class="skill-progress-bar" data-skill="70"></div>
                                 </div>
                             </div>
-                            <!-- <div class="skill-item">
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-gray-300">AWS/Cloud</span>
-                                    <span class="text-gray-400">75%</span>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="skill-progress-bar" data-skill="75"></div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -611,242 +693,128 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20">
-        <div class="container mx-auto px-6">
+    <section id="projects" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Featured Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <!-- <div class="project-card bg-slate-800 rounded-lg overflow-hidden" data-aos="fade-up"
-                    data-aos-delay="100">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://picsum.photos/seed/project1/600/400.jpg" alt="E-Commerce Platform"
-                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">E-Commerce Platform</h3>
-                        <p class="text-gray-400 mb-4">A full-featured online shopping platform with payment integration,
-                            inventory management, and user authentication.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">React.js</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Node.js</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">MongoDB</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Stripe
-                                API</span>
-                        </div>
-                        <div class="flex gap-4">
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors"><i
-                                    class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors"><i
-                                    class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div> -->
-
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Project 2 -->
-                <div class="project-card bg-slate-800 rounded-lg overflow-hidden" data-aos="fade-up"
-                    data-aos-delay="200">
+                <div class="project-card bg-slate-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
                     <div class="h-48 overflow-hidden">
-                        <img src="./img/Screenshot 2025-11-21 181437.jpg" alt="Task Management App"
-                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        <img src="./img/Screenshot 2025-11-21 181437.jpg" alt="Task Management App" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">To-Do App</h3>
-                        <p class="text-gray-400 mb-4">A simple, clean, and responsive to-do list built with HTML, CSS,
-                            and JavaScript. Includes task creation, due dates, priorities, search, filters, sorting,
-                            completion tracking, and local storage persistence. Tasks can also be exported for backup.
-                        </p>
+                        <p class="text-gray-400 mb-4">A simple, clean, and responsive to-do list built with HTML, CSS, and JavaScript. Includes task creation, due dates, priorities, search, filters, sorting, completion tracking, and local storage persistence.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">js</span>
-                            <span
-                                class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">HTML5/CSS3</span>
-                            <!-- <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Material U</span> -->
+                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">JavaScript</span>
+                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">HTML5/CSS3</span>
                         </div>
                         <div class="flex gap-4">
-                            <a href="https://navdak.github.io/To-do-list-App/"
-                                class="text-indigo-400 hover:text-indigo-300 transition-colors"><i
-                                    class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="https://github.com/Navdak/To-do-list-App"
-                                class="text-indigo-400 hover:text-indigo-300 transition-colors"><i
-                                    class="fab fa-github"></i> GitHub</a>
+                            <a href="https://navdak.github.io/To-do-list-App/" class="text-indigo-400 hover:text-indigo-300 transition-colors" target="_blank">
+                                <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                            </a>
+                            <a href="https://github.com/Navdak/To-do-list-App" class="text-indigo-400 hover:text-indigo-300 transition-colors" target="_blank">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card bg-slate-800 rounded-lg overflow-hidden" data-aos="fade-up"
-                    data-aos-delay="300">
+                <div class="project-card bg-slate-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
                     <div class="h-48 overflow-hidden">
-                        <img src="./img/Screenshot 2025-11-21 183741.jpg" alt="Weather Dashboard"
-                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        <img src="./img/Screenshot 2025-11-21 183741.jpg" alt="Weather Dashboard" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Weather Dashboard</h3>
-                        <p class="text-gray-400 mb-4">A responsive weather application with location-based forecasts,
-                            interactive maps, and detailed weather information.</p>
+                        <p class="text-gray-400 mb-4">A responsive weather application with location-based forecasts, interactive maps, and detailed weather information.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">JavaScript</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Weather
-                                API</span>
-                            <span
-                                class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Chart.js</span>
+                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">JavaScript</span>
+                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Weather API</span>
+                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Chart.js</span>
                         </div>
                         <div class="flex gap-4">
-                            <a href="https://navdak.github.io/weather-app/"
-                                class="text-indigo-400 hover:text-indigo-300 transition-colors"><i
-                                    class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="https://github.com/Navdak/weather-app"
-                                class="text-indigo-400 hover:text-indigo-300 transition-colors"><i
-                                    class="fab fa-github"></i> GitHub</a>
+                            <a href="https://navdak.github.io/weather-app/" class="text-indigo-400 hover:text-indigo-300 transition-colors" target="_blank">
+                                <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                            </a>
+                            <a href="https://github.com/Navdak/weather-app" class="text-indigo-400 hover:text-indigo-300 transition-colors" target="_blank">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Project 4 -->
-                <!-- <div class="project-card bg-slate-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="400">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://picsum.photos/seed/project4/600/400.jpg" alt="Blog Platform" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Blog Platform</h3>
-                        <p class="text-gray-400 mb-4">A content management system for bloggers with rich text editing, SEO optimization, and social media integration.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">PHP</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">MySQL</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Bootstrap</span>
-                        </div>
-                        <div class="flex gap-4">
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- Project 5 -->
-                <!-- <div class="project-card bg-slate-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="500">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://picsum.photos/seed/project5/600/400.jpg" alt="Social Media Dashboard" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Social Media Dashboard</h3>
-                        <p class="text-gray-400 mb-4">An analytics dashboard for social media management with data visualization, scheduling, and engagement tracking.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">React.js</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Node.js</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">D3.js</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">PostgreSQL</span>
-                        </div>
-                        <div class="flex gap-4">
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- Project 6 -->
-                <!-- <div class="project-card bg-slate-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="600">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://picsum.photos/seed/project6/600/400.jpg" alt="Fitness Tracker" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Fitness Tracker</h3>
-                        <p class="text-gray-400 mb-4">A mobile-responsive fitness tracking application with workout plans, progress tracking, and nutrition monitoring.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">React Native</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Node.js</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">MongoDB</span>
-                        </div>
-                        <div class="flex gap-4">
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             </div>
+        </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-slate-800/50">
-        <div class="container mx-auto px-6">
+    <section id="services" class="section-padding bg-slate-800/50">
+        <div class="container mx-auto px-4 sm:px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Services</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Service 1 -->
                 <div class="gradient-border h-full" data-aos="fade-up" data-aos-delay="100">
                     <div class="gradient-border-inner text-center">
-                        <div
-                            class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-code text-white text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Web Development</h3>
-                        <p class="text-gray-400">Creating responsive, fast, and modern websites using the latest
-                            technologies and best practices.</p>
+                        <p class="text-gray-400">Creating responsive, fast, and modern websites using the latest technologies and best practices.</p>
                     </div>
                 </div>
 
                 <!-- Service 2 -->
                 <div class="gradient-border h-full" data-aos="fade-up" data-aos-delay="200">
                     <div class="gradient-border-inner text-center">
-                        <div
-                            class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-layer-group text-white text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Full-Stack Development</h3>
-                        <p class="text-gray-400">Building complete web applications from frontend to backend with
-                            seamless integration.</p>
+                        <p class="text-gray-400">Building complete web applications from frontend to backend with seamless integration.</p>
                     </div>
                 </div>
 
                 <!-- Service 3 -->
                 <div class="gradient-border h-full" data-aos="fade-up" data-aos-delay="300">
                     <div class="gradient-border-inner text-center">
-                        <div
-                            class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-plug text-white text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-2">API Integration</h3>
-                        <p class="text-gray-400">Connecting your application with third-party services and APIs to
-                            enhance functionality.</p>
+                        <p class="text-gray-400">Connecting your application with third-party services and APIs to enhance functionality.</p>
                     </div>
                 </div>
 
                 <!-- Service 4 -->
                 <div class="gradient-border h-full" data-aos="fade-up" data-aos-delay="400">
                     <div class="gradient-border-inner text-center">
-                        <div
-                            class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-database text-white text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Database Design</h3>
-                        <p class="text-gray-400">Designing efficient and scalable database architectures tailored to
-                            your application needs.</p>
+                        <p class="text-gray-400">Designing efficient and scalable database architectures tailored to your application needs.</p>
                     </div>
                 </div>
 
                 <!-- Service 5 -->
                 <div class="gradient-border h-full" data-aos="fade-up" data-aos-delay="500">
                     <div class="gradient-border-inner text-center">
-                        <div
-                            class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-mobile-alt text-white text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Responsive Design</h3>
-                        <p class="text-gray-400">Ensuring your application looks and works perfectly on all devices and
-                            screen sizes.</p>
+                        <p class="text-gray-400">Ensuring your application looks and works perfectly on all devices and screen sizes.</p>
                     </div>
                 </div>
 
                 <!-- Service 6 -->
                 <div class="gradient-border h-full" data-aos="fade-up" data-aos-delay="600">
                     <div class="gradient-border-inner text-center">
-                        <div
-                            class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-rocket text-white text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Performance Optimization</h3>
-                        <p class="text-gray-400">Improving website speed, SEO, and overall performance for better user
-                            experience.</p>
+                        <p class="text-gray-400">Improving website speed, SEO, and overall performance for better user experience.</p>
                     </div>
                 </div>
             </div>
@@ -854,10 +822,10 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20">
-        <div class="container mx-auto px-6">
+    <section id="contact" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Get In Touch</h2>
-            <div class="grid md:grid-cols-2 gap-12">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
                 <div data-aos="fade-right">
                     <h3 class="text-2xl font-bold mb-4 gradient-text">Let's Work Together</h3>
                     <p class="text-gray-400 mb-6">
@@ -871,7 +839,7 @@
                             </div>
                             <div>
                                 <p class="text-gray-400 text-sm">Email</p>
-                                <p class="text-white">alex.chen@example.com</p>
+                                <p class="text-white">navdak86@example.com</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-4">
@@ -889,68 +857,37 @@
                             </div>
                             <div>
                                 <p class="text-gray-400 text-sm">Location</p>
-                                <p class="text-white"> Enugu Enugu, Nigeria</p>
+                                <p class="text-white">Enugu, Nigeria</p>
                             </div>
                         </div>
                     </div>
                     <div class="flex gap-4 mt-8">
-                        <a href="https://github.com/Navdak"
-                            class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors">
+                        <a href="https://github.com/Navdak" class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="www.linkedin.com/in/ikechukw"
-                            class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors">
+                        <a href="https://www.linkedin.com/in/ikechukw" class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://x.com/navdak86"
-                            class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors">
+                        <a href="https://x.com/navdak86" class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors" aria-label="Twitter">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <!-- <a href="#" class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors">
-                            <i class="fab fa-dribbble"></i>
-                        </a> -->
                     </div>
                 </div>
                 <div data-aos="fade-left">
-                    <!-- <form id="contact-form" class="space-y-4" action="https://api.web3forms.com/submit" method="POST">
-
-                        <input type="hidden" name="access_key" value="abfcd844-20ef-4d61-9a53-8a0b24062338">
-                        
-                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                        <input type="hidden" name="access_key" value="2c125164-1f99-4c97-a50b-de719e5c5ff5">
                         <div>
-                            <label for="name" class="block text-gray-400 mb-2">Name</label>
-                            <input type="text" id="name" name="name" class="form-input w-full px-4 py-3 rounded-lg"
-                                required>
+                            <input type="text" name="name" required placeholder="Name" class="form-input w-full px-4 py-3 rounded-lg">
                         </div>
                         <div>
-                            <label for="email" class="block text-gray-400 mb-2">Email</label>
-                            <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-lg"
-                                required>
+                            <input type="email" name="email" required placeholder="Email" class="form-input w-full px-4 py-3 rounded-lg">
                         </div>
                         <div>
-                            <label for="subject" class="block text-gray-400 mb-2">Subject</label>
-                            <input type="text" id="subject" name="subject"
-                                class="form-input w-full px-4 py-3 rounded-lg" required>
-                        </div>
-                        <div>
-                            <label for="message" class="block text-gray-400 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5"
-                                class="form-input w-full px-4 py-3 rounded-lg" required></textarea>
+                            <textarea name="message" required placeholder="Message" rows="5" class="form-input w-full px-4 py-3 rounded-lg"></textarea>
                         </div>
                         <button type="submit" class="btn-primary w-full py-3 rounded-lg text-white font-medium">
                             Send Message
                         </button>
-                    </form> -->
-
-                    <form action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="2c125164-1f99-4c97-a50b-de719e5c5ff5">
-                        <input type="text" name="name" required placeholder="Name"
-                            class="form-input w-full px-4 py-3 rounded-lg"><br><br>
-                        <input type="email" name="email" required placeholder="Email"
-                            class="form-input w-full px-4 py-3 rounded-lg"><br><br>
-                        <textarea name="message" required placeholder="Message"
-                            class="form-input w-full px-4 py-3 rounded-lg"></textarea><br><br>
-                        <button type="submit" class="form-input btn-primary w-full px-4 py-3 rounded-lg">Submit</button>
                     </form>
                     <div id="form-message" class="mt-4 p-4 rounded-lg hidden"></div>
                 </div>
@@ -960,22 +897,13 @@
 
     <!-- Footer -->
     <footer class="py-8 bg-slate-900">
-        <div class="container mx-auto px-6">
-            <!-- <div class="flex flex-col md:flex-row justify-between items-center"> -->
-            <div class="mb-4 md:mb-0 text-center">
-                <p class="text-gray-400">© 2023 Prince O. All rights reserved.</p>
-            </div>
-            <!-- <div class="flex gap-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
-                </div> -->
-            <!-- </div> -->
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <p class="text-gray-400">© 2025 Ikechukwu Prince Onyebuchi. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top"
-        class="fixed bottom-8 right-8 w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center text-white opacity-0 invisible transition-all hover:bg-indigo-600 z-40">
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center text-white opacity-0 invisible transition-all hover:bg-indigo-600 z-40">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -1077,35 +1005,6 @@
                 behavior: 'smooth'
             });
         });
-
-        // Contact form submission
-        // const contactForm = document.getElementById('contact-form');
-        // const formMessage = document.getElementById('form-message');
-
-        // contactForm.addEventListener('submit', (e) => {
-        //     e.preventDefault();
-
-        //     // Get form values
-        //     const name = document.getElementById('name').value;
-        //     const email = document.getElementById('email').value;
-        //     const subject = document.getElementById('subject').value;
-        //     const message = document.getElementById('message').value;
-
-        //     // Here you would normally send the data to a server
-        //     // For this demo, we'll just show a success message
-
-        //     formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
-        //     formMessage.classList.remove('hidden', 'bg-red-500/20', 'text-red-400');
-        //     formMessage.classList.add('bg-green-500/20', 'text-green-400');
-
-        //     // Reset form
-        //     contactForm.reset();
-
-        //     // Hide message after 5 seconds
-        //     setTimeout(() => {
-        //         formMessage.classList.add('hidden');
-        //     }, 5000);
-        // });
 
         // Create particle background
         const particlesContainer = document.getElementById('particles');
